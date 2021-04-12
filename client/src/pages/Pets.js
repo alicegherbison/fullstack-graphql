@@ -32,10 +32,10 @@ export default function Pets() {
   const [modal, setModal] = useState(false);
   const [addPet, addedPet] = useMutation(ADD_PET, {
     update(cache, { data: { addPet } }) {
-      const allPets = cache.readQuery({ query: FETCH_ALL_PETS });
+      const { pets } = cache.readQuery({ query: FETCH_ALL_PETS });
       cache.writeQuery({
         query: FETCH_ALL_PETS,
-        data: { pets: [addPet, ...allPets] },
+        data: { pets: [addPet, ...pets] },
       });
     },
   });
