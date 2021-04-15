@@ -13,6 +13,7 @@ const ADD_PET = gql`
       img
       name
       type
+      __typename
     }
   }
 `;
@@ -31,6 +32,7 @@ const FETCH_ALL_PETS = gql`
 export default function Pets() {
   const [modal, setModal] = useState(false);
   const [addPet, addedPet] = useMutation(ADD_PET, {
+    // update runs after the mutation response has come back
     update(cache, { data: { addPet } }) {
       const { pets } = cache.readQuery({ query: FETCH_ALL_PETS });
       cache.writeQuery({
@@ -43,12 +45,22 @@ export default function Pets() {
 
   const onSubmit = input => {
     addPet({
+      optimisticResponse: {
+        __typename: "Mutation",
+        addPet: {
+          __typename: "Pet",
+          id: "",
+          img: "",
+          name: input.name,
+          type: input.type,
+        },
+      },
       variables: { pet: input },
     });
     setModal(false);
   };
 
-  if (fetchedPets.loading || addedPet.loading) {
+  if (fetchedPets.loading) {
     return <Loader />;
   }
 
