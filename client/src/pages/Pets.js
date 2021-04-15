@@ -12,6 +12,10 @@ const ADD_PET = gql`
       id
       img
       name
+      owner {
+        age @client
+        id
+      }
       type
       __typename
     }
