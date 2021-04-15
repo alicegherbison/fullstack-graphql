@@ -23,17 +23,19 @@ const PETS_FIELDS = gql`
 const ADD_PET = gql`
   mutation AddPet($pet: NewPetInput!) {
     addPet(input: $pet) {
-      ${PETS_FIELDS}
+      ...PetsFields
     }
   }
+  ${PETS_FIELDS}
 `;
 
 const FETCH_ALL_PETS = gql`
   query FetchAllPets {
     pets {
-      ${PETS_FIELDS}
+      ...PetsFields
     }
   }
+  ${PETS_FIELDS}
 `;
 
 export default function Pets() {
