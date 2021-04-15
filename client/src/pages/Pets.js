@@ -6,18 +6,24 @@ import Loader from "../components/Loader";
 import NewPetModal from "../components/NewPetModal";
 import PetsList from "../components/PetsList";
 
+const PETS_FIELDS = gql`
+  fragment PetsFields on Pet {
+    id
+    img
+    name
+    owner {
+      age @client
+      id
+    }
+    type
+    __typename
+  }
+`;
+
 const ADD_PET = gql`
   mutation AddPet($pet: NewPetInput!) {
     addPet(input: $pet) {
-      id
-      img
-      name
-      owner {
-        age @client
-        id
-      }
-      type
-      __typename
+      ${PETS_FIELDS}
     }
   }
 `;
@@ -25,14 +31,7 @@ const ADD_PET = gql`
 const FETCH_ALL_PETS = gql`
   query FetchAllPets {
     pets {
-      id
-      img
-      name
-      owner {
-        age @client
-        id
-      }
-      type
+      ${PETS_FIELDS}
     }
   }
 `;
