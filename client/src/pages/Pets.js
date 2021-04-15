@@ -24,6 +24,10 @@ const FETCH_ALL_PETS = gql`
       id
       img
       name
+      owner {
+        age @client
+        id
+      }
       type
     }
   }
