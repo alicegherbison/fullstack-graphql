@@ -16,6 +16,7 @@ const PETS_FIELDS = gql`
       id
     }
     type
+    vaccinated @client
     __typename
   }
 `;
