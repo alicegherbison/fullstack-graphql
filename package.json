@@ -45,6 +45,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^7.27.0",
+    "eslint-config-recommended": "^4.1.0",
     "jest": "^24.9.0",
     "parcel": "^1.12.3"
   }
